@@ -1,4 +1,5 @@
 import express from "express";
+import Lab5 from "./Lab5/index.js";
 import cors from "cors";
 import session from "express-session";
 import "dotenv/config";
@@ -6,13 +7,14 @@ import db from "./Kambaz/Database/index.js";
 import UserRoutes from "./Kambaz/Users/routes.js";
 
 const app = express();
-
 app.use(
   cors({
     credentials: true,
     origin: process.env.CLIENT_URL || "http://localhost:3000",
   })
 );
+
+Lab5(app);
 
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",

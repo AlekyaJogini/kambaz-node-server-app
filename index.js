@@ -6,8 +6,7 @@ import Lab5 from "./Lab5/index.js";
 
 import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
-import ModuleRoutes from "./Kambaz/Modules/routes.js";
-import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
+import ModulesRoutes from "./Kambaz/Modules/routes.js";
 import db from "./Kambaz/Database/index.js";
 import cors from "cors";
 
@@ -47,8 +46,6 @@ const port = process.env.PORT || 4000;
 // ✅ Add routes AFTER session setup
 UserRoutes(app, db);
 CourseRoutes(app, db);
-ModuleRoutes(app, db);
-AssignmentRoutes(app, db);
 Hello(app);
 Lab5(app);
 

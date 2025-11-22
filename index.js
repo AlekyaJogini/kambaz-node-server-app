@@ -28,6 +28,7 @@ const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
   resave: false,
   saveUninitialized: false,
+ 
 };
 
 if (process.env.SERVER_ENV !== "development") {
@@ -35,6 +36,9 @@ if (process.env.SERVER_ENV !== "development") {
   sessionOptions.cookie = {
     sameSite: "none",
     secure: true,
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+
     //domain: process.env.SERVER_URL,
   };
 }

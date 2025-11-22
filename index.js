@@ -46,7 +46,7 @@ app.use(express.json());
 const port = process.env.PORT || 4000;
 
 
-// ✅ Add routes AFTER session setup
+
 UserRoutes(app, db);
 CourseRoutes(app, db);
 Hello(app);

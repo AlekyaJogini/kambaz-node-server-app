@@ -5,6 +5,7 @@ import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
+import enrollments from "./Kambaz/Database/enrollments.js";
 import db from "./Kambaz/Database/index.js";
 import cors from "cors";
 import "dotenv/config";
@@ -30,7 +31,8 @@ if (process.env.SERVER_ENV !== "development") {
   sessionOptions.cookie = {
     sameSite: "none",
     secure: true,
-    httpOnly: true, 
+    httpOnly: false,  // ✅ ADD THIS
+    // ✅ REMOVE domain completely - don't set it at all
   };
 }
 
@@ -39,14 +41,12 @@ app.use(express.json());
 
 const port = process.env.PORT || 4000;
 
-
 UserRoutes(app, db);
 CourseRoutes(app, db);
 ModuleRoutes(app, db);
 AssignmentRoutes(app, db);
+enrollments(app, db);
 Hello(app);
 Lab5(app);
-
-//modules courses added 
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

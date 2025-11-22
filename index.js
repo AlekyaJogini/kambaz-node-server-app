@@ -38,7 +38,7 @@ if (process.env.SERVER_ENV !== "development") {
     secure: true,
     
   
-    //domain: process.env.SERVER_URL,
+  domain: process.env.SERVER_URL,
   };
 }
 

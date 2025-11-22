@@ -5,7 +5,7 @@ export default function CourseRoutes(app, db) {
   const dao = CoursesDao(db);
   const enrollmentsDao = EnrollmentsDao(db);
   
-  // ✅ Group callback functions at the top
+ 
   const findAllCourses = (req, res) => {
     const courses = dao.findAllCourses();
     res.send(courses);

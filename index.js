@@ -19,6 +19,7 @@ app.use(
   cors({
     credentials: true,
     origin: process.env.CLIENT_URL || "http://localhost:3000",
+    credentials: true,
     
   })
 );
@@ -38,7 +39,7 @@ if (process.env.SERVER_ENV !== "development") {
   sessionOptions.cookie = {
     sameSite: "none",
     secure: true,
-    httpOnly: true,
+    httpOnly: false,
     
   };
 }

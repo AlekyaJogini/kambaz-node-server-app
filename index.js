@@ -1,24 +1,28 @@
 import express from "express";
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5/index.js";
+
+
+
 import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
-import ModuleRoutes from "./Kambaz/Modules/routes.js";
+import ModulesRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
-import enrollments from "./Kambaz/Database/enrollments.js";
 import db from "./Kambaz/Database/index.js";
 import cors from "cors";
+
 import "dotenv/config";
 import session from "express-session";
 
 const app = express();
-
 app.use(
   cors({
     credentials: true,
     origin: process.env.CLIENT_URL || "http://localhost:3000",
   })
 );
+
+
 
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
@@ -31,22 +35,22 @@ if (process.env.SERVER_ENV !== "development") {
   sessionOptions.cookie = {
     sameSite: "none",
     secure: true,
-    httpOnly: false,  // ✅ ADD THIS
-    // ✅ REMOVE domain completely - don't set it at all
+    //domain: process.env.SERVER_URL,
   };
 }
 
 app.use(session(sessionOptions));
 app.use(express.json());
-
 const port = process.env.PORT || 4000;
 
+
+// ✅ Add routes AFTER session setup
 UserRoutes(app, db);
 CourseRoutes(app, db);
-ModuleRoutes(app, db);
+ModulesRoutes(app, db);
 AssignmentRoutes(app, db);
-enrollments(app, db);
 Hello(app);
 Lab5(app);
+
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

@@ -53,8 +53,6 @@ export default function UserRoutes(app, db) {
     res.json(currentUser);
   };
 
-  
-
   // ✅ ADD: Enroll user in course
   const enrollUserInCourse = (req, res) => {
     let { userId, courseId } = req.params;

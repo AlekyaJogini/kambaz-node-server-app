@@ -42,7 +42,7 @@ if (process.env.SERVER_ENV !== "development") {
     secure: true,
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24,
-    domain: process.env.SERVER_URL
+    
   };
     
   

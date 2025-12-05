@@ -1,9 +1,10 @@
+import Database from "../Database/index.js";  // ← ADD THIS
 import { v4 as uuidv4 } from "uuid";
 
-export default function EnrollmentsDao(db) {
-  let { enrollments } = db;
+export default function EnrollmentsDao() {  // ← REMOVED db parameter
   
   function enrollUserInCourse(userId, courseId) {
+    const { enrollments } = Database;  // ← CHANGED: Get from Database
     const newEnrollment = {
       _id: uuidv4(),
       user: userId,
@@ -14,6 +15,7 @@ export default function EnrollmentsDao(db) {
   }
   
   function unenrollUserFromCourse(userId, courseId) {
+    const { enrollments } = Database;  // ← CHANGED: Get from Database
     const index = enrollments.findIndex(
       (e) => e.user === userId && e.course === courseId
     );

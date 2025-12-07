@@ -92,19 +92,28 @@ app.put("/api/users/:userId", updateUser);
     res.json(currentUser);
   };
   
-  const findCoursesForEnrolledUser = async (req, res) => {  // ← ADDED async
-    let { userId } = req.params;
-    if (userId === "current") {
-      const currentUser = req.session["currentUser"];
-      if (!currentUser) {
-        res.sendStatus(401);
-        return;
-      }
-      userId = currentUser._id;
-    }
-    const courses = await coursesDao.findCoursesForEnrolledUser(userId);  // ← ADDED await
+  const findCoursesForEnrolledUser = async (req, res) => {
+  const currentUser = req.session["currentUser"];  // ✅ ADD: Get currentUser first
+  if (!currentUser) {
+    res.sendStatus(401);
+    return;
+  }
+  
+  // ✅ ADD: ADMIN sees ALL courses
+  if (currentUser.role === "ADMIN") {
+    const courses = await coursesDao.findAllCourses();
     res.json(courses);
-  };
+    return;
+  }
+  
+  // Regular users see only enrolled courses
+  let { userId } = req.params;
+  if (userId === "current") {
+    userId = currentUser._id;
+  }
+   const courses = await enrollmentsDao.findCoursesForUser(userId);
+  res.json(courses);
+};
   
   const enrollUserInCourse = async (req, res) => {  // ← ADDED async
     let { userId, courseId } = req.params;

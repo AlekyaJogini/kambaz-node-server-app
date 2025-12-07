@@ -60,7 +60,7 @@ const port = process.env.PORT || 4000;
 
 // ✅ Add routes AFTER session setup
 UserRoutes(app);
-CourseRoutes(app, db);
+CourseRoutes(app);
 ModulesRoutes(app, db);
 AssignmentRoutes(app, db);
 Hello(app);

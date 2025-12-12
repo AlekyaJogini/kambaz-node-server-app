@@ -15,6 +15,7 @@ import cors from "cors";
 
 import "dotenv/config";
 import session from "express-session";
+import QuizAttemptsRoutes from "./Kambaz/QuizzAttempts/routes.js";
 
 
 
@@ -67,6 +68,7 @@ AssignmentRoutes(app, db);
 QuizzesRoutes(app);
 Hello(app);
 Lab5(app);
+QuizAttemptsRoutes(app);
 
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

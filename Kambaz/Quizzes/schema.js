@@ -41,9 +41,9 @@ const quizSchema = new mongoose.Schema(
     oneQuestionAtATime: { type: Boolean, default: true },
     webcamRequired: { type: Boolean, default: false },
     lockQuestionsAfterAnswering: { type: Boolean, default: false },
-    dueDate: Date,
-    availableDate: Date,
-    untilDate: Date,
+    dueDate: String,
+    availableDate: String,
+    untilDate: String,
     published: { type: Boolean, default: false },
     questions: [questionSchema],  // Embedded questions
   },
